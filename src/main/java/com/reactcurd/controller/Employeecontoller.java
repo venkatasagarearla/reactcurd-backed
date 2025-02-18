@@ -35,8 +35,9 @@ public class Employeecontoller {
 	}
 	@GetMapping("/getEmployee/{id}")
 	public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") Long id){
-//		System.out.println("incoming id"+id);
+
 		Employee emp=empService.getEmployeeById(id);
+		System.out.println("Empoyee not found");
 		EmployeeDto empdt=new EmployeeDto(emp.getId(),emp.getFirstname(),emp.getLastname(),emp.getEmail());
 		return ResponseEntity.ok(empdt);
 	}

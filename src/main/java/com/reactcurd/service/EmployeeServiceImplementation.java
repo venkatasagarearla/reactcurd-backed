@@ -29,6 +29,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	@Override
 	public Employee getEmployeeById(Long id) {
 	    Employee emp=emprepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee is not exist with given id"+id));
+	    
 		return emp;
 	}
 	@Override
