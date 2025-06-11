@@ -11,6 +11,7 @@ public class GlobalException {
 	public ResponseEntity<String> handleEmployeeCreationException(EmployeeCreationException ex){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
+    
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> EmployeeNotFound(ResourceNotFoundException ex){
     	System.out.println("Excption occurs");
