@@ -1,0 +1,47 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+       MYSQL_ROOT_PASSWORD: Sagar1212@
+       MYSQL_DATABASE: reactcurd
+    volumes:
+       - mysql-db-data:/var/lib/mysql
+    ports:
+        - "3307:3306"
+        
+        
+       
+  demo:
+       image: reactcurd:latest
+       container_name: reactcurd-service
+       ports:
+          -   "8080:8080"
+       depends_on:
+          - mysql-db          
+  prometheus:
+       image: prom/prometheus
+       volumes:
+         - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+       ports:
+          - "9090:9090"
+       depends_on:
+          - demo
+          
+  grafana:
+       image: grafana/grafana-enterprise
+       container_name: grafana-dashboard-reactcurd
+       ports:
+         - "3000:3000"
+       volumes:
+        - grafana-storage:/var/lib/grafana
+       environment:
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=admin
+        
+volumes:
+       mysql-db-data:
+       grafana-storage: {}
+               
+     
+  

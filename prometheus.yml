@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'reactcurd-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['demo:8080']
+        labels:
+          application: 'reactcurd-service'
+
